@@ -33,7 +33,7 @@ class Channel {
   async _runRecvLoop() {
     let url = this.baseUrl + this.channelId;
     while (true) {
-      let response = await fetch(channelUrl);
+      let response = await fetch(url);
       if (response.status === 200) {
         let message = await response.json();
         this.messageEmitter.emit('message', message);
