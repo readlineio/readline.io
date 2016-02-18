@@ -28,7 +28,7 @@ module.exports = {
   module: {
     loaders: [
       {test: /\.css$/, loaders: ['style', 'css']},
-      {test: /\.jsx?$/, loaders: ['babel?cacheDirectory'], include: './src/'}
+      {test: /\.jsx?$/, loaders: ['babel?cacheDirectory'], exclude: '/node_modules/'}
     ]
   }
 };
