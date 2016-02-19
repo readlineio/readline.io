@@ -1,20 +1,84 @@
 h1 {
-  color: '#333333';
   text-align: center;
+  background-color: white;
+  margin: 0;
+  margin-bottom: 10px;
+  padding: 20px;
+  font-weight: 500;
 }
 
 body {
-  font-family: 'Avenir';
+  color: '#333333';
+  font-family: 'SF UI Display';
+  font-size: 16px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
   margin: 0;
-  background-color: #eeeeee;
+  /* background-color: #468B78; */
+  background-color: #E5E5E5;
+}
+
+.card {
+  box-shadow: 0 1px 1px rgba(0,0,0,0.12), 0 1px 1px rgba(0,0,0,0.24);
 }
 
 .container {
-  background-color: white;
-  border-right: 1px solid #eeeeee;
-  border-left: 1px solid #eeeeee;
+  /* background-color: #66BBB5; */
+  /* background-color: #EEEEEE; */
   width: 480px;
   margin: 0 auto;
+  padding: 20px;
   height: 100%;
   min-height: 100%;
+}
+
+.header {
+  width: 100%;
+  padding: 10px 0;
+  background-color: #3D8B85;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.12), 0 1px 1px rgba(0,0,0,0.24);
+}
+
+.header h2 {
+  color: white;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 18px;
+  letter-spacing: 2px;
+  font-family: "Avenir";
+  font-weight: 400;
+  margin: 0 auto;
+  width: 50%;
+}
+
+.readline-item {
+  background-color: white;
+  padding: 20px;
+  margin-bottom: 10px;
+}
+
+input {
+  height: 30px;
+  width: 75%;
+  padding-left: 10px;
+  margin-right: 4px;
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 200;
+}
+
+button {
+  height: 30px;
+  border: 1px solid #AAAAAA;
+  border-radius: 0;
+  background-color: white;
+  font-size: 14px;
+  font-weight: 200;
+  min-width: 60px;
+  margin-top: 10px;
+  margin-right: 4px;
+}
+
+button:active {
+  background-color: #104642;
 }
