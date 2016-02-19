@@ -14,7 +14,8 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: 'http://localhost:8081/assets/'
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
@@ -30,6 +31,7 @@ module.exports = {
   },
   devServer: {
     contentBase: './dist',
-    hot: true
+    hot: true,
+    publicPath: 'http://localhost:8081/assets/'
   }
 };
