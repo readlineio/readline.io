@@ -15,7 +15,6 @@ class Channel {
     this.baseUrl = baseUrl;
     this.channelId = channelId;
     this.messageEmitter = new EventEmitter();
-    this._runRecvLoop();
   }
 
   send(message) {
@@ -30,15 +29,21 @@ class Channel {
     this.messageEmitter.addListener('message', callback);
   }
 
-  async _runRecvLoop() {
+  async listen() {
+    console.log("Connecting to channel:", this.channelId);
     let url = this.baseUrl + this.channelId;
     while (true) {
-      let response = await fetch(url);
-      if (response.status === 200) {
-        let message = await response.json();
-        this.messageEmitter.emit('message', message);
-      } else {
-        console.log("Empty response from channel, restarting connection.");
+      try {
+        let response = await fetch(url);
+        if (response.status === 200) {
+          let message = await response.json();
+          this.messageEmitter.emit('message', message);
+        } else {
+          console.log("Empty response from channel, restarting connection.");
+        }
+      } catch (err) {
+        console.error(err);
+        console.log("Invalid response from channel, restarting connection.");
       }
     }
   }
