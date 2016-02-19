@@ -10,7 +10,7 @@ import Header from '../components/Header';
 import Base from '../blocks/Base';
 import blockRegistry from '../blocks/blockRegistry';
 
-const SERVER_NAME = 'localhost:8888';
+const SERVER_NAME = 'readline.io';
 
 
 export default class ReadlineMain extends React.Component {
