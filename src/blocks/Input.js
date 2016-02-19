@@ -16,7 +16,7 @@ let Input = Base.createBlock('input', {
   },
 
   returnInput(value) {
-    this.props.store.makeCall(this.props.item.callback, [this.state.inputValue]);
+    this.props.sendCall(this.props.item.callback, [this.state.inputValue]);
   },
 
   render() {
@@ -26,8 +26,10 @@ let Input = Base.createBlock('input', {
           {this.props.item.prompt}
         </section>
         <section>
-          <input onChange={this.handleChange} value={this.state.inputvalue}></input>
-          <button onClick={this.returnInput}>Submit</button>
+          <form onSubmit={(evt) => {evt.preventDefault(); return false;}}>
+            <input onChange={this.handleChange} value={this.state.inputvalue}></input>
+            <button onClick={this.returnInput}>Submit</button>
+          </form>
         </section>
       </section>
     );

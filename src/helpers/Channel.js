@@ -71,8 +71,8 @@ class PageChannel extends Channel {
       action: 'call',
       session: this.sessionId,
       fnname: functionName,
-      args: args,
-      kwargs: keywordArgs
+      args: args || [],
+      kwargs: keywordArgs || {}
     };
     this.send(message);
   }

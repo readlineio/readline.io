@@ -4,7 +4,7 @@ import Base from './Base';
 let Choice = Base.createBlock('choice', {
 
   returnInput(value) {
-    this.props.store.makeCall(this.props.item.callback, [value]);
+    this.props.sendCall(this.props.item.callback, [value]);
   },
 
   render() {

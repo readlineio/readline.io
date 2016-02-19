@@ -6,6 +6,7 @@
 
 import React from 'react';
 import {PageChannel} from '../helpers/Channel';
+import Header from '../components/Header';
 import Base from '../blocks/Base';
 import blockRegistry from '../blocks/blockRegistry';
 
@@ -44,6 +45,10 @@ export default class ReadlineMain extends React.Component {
     this.sendChannel.send(message);
   }
 
+  sendCall(fn, args, kwargs) {
+    this.sendChannel.sendCall(fn, args, kwargs);
+  }
+
   renderItemDefault(item) {
     return (
       <h2>{item}</h2>
@@ -57,14 +62,18 @@ export default class ReadlineMain extends React.Component {
       return this.renderItemDefault(item);
     } else {
       return (
-        <Factory item={item} send={(message) => this.send(message)} />
+        <Factory
+          item={item}
+          send={(message) => this.send(message)}
+          sendCall={(fn, args, kwargs) => this.sendCall(fn, args, kwargs)}
+          />
       );
     }
   }
 
   renderItem(item) {
     return (
-      <section className="readline-item">
+      <section className="readline-item card">
         {this.renderItemInner(item)}
       </section>
     )
@@ -72,9 +81,12 @@ export default class ReadlineMain extends React.Component {
 
   render() {
     return (
-      <section className="container">
-        <h1>ReadlineIO</h1>
-        { this.state.items.map((item) => (this.renderItem(item))) }
+      <section>
+        <Header />
+        <section className="container">
+          <h1 className="card">Example program</h1>
+          { this.state.items.map((item) => (this.renderItem(item))) }
+        </section>
       </section>
     );
   }
