@@ -12,7 +12,7 @@
   "main": "./server.js",
   "scripts": {
     "build": "webpack --config webpack.config.prod.js",
-    "dev": "webpack-dev-server --config webpack.config.dev.js"
+    "dev": "node server.js"
   },
   "dependencies": {
     "babel-plugin-transform-async-to-generator": "^6.5.0",
