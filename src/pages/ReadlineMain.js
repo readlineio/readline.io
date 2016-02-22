@@ -6,6 +6,7 @@
 
 import React from 'react';
 import {PageChannel} from '../helpers/Channel';
+import {BaseStyles} from '../constants/Constants';
 import ProgramStore from '../helpers/ProgramStore';
 
 import Header from '../components/Header';
@@ -83,7 +84,7 @@ export default class ReadlineMain extends React.Component {
 
   renderItem(item, index) {
     return (
-      <section key={index} className="readline-item card">
+      <section key={index} style={Object.assign({}, styles.item, BaseStyles.card)}>
         {this.renderItemInner(item)}
       </section>
     )
@@ -91,14 +92,14 @@ export default class ReadlineMain extends React.Component {
 
   render() {
     return (
-      <section className="outer">
+      <section style={styles.outer}>
         <Header />
-        <section className="container">
-          <section className="content-left">
-            <h1>Recent Programs</h1>
+        <section style={styles.container}>
+          <section style={styles.contentLeft}>
+            <h1 style={styles.programHeader}>Recent Programs</h1>
             <ProgramListing programs={this.state.programs} />
           </section>
-          <section className="content-main">
+          <section style={styles.contentMain}>
             { this.state.items.map((item, index) => (this.renderItem(item, index))) }
           </section>
         </section>
@@ -107,6 +108,46 @@ export default class ReadlineMain extends React.Component {
   }
 
 }
+
+const containerWidth = 960;
+const contentLeftWidth = 280;
+const contentMainWidth = containerWidth - contentLeftWidth;
+
+
+let styles = {
+
+  programHeader: {
+    padding: '20px',
+    fontWeight: '500',
+    margin: '10px 0'
+  },
+
+  outer: {
+    width: '100%'
+  },
+
+  container: {
+    /* background-color: #66BBB5; */
+    /* background-color: #EEEEEE; */
+    width: containerWidth,
+    margin: '20px auto',
+    display: 'flex',
+    flexDirection: 'row'
+  },
+
+  contentLeft: {
+    width: contentLeftWidth
+  },
+  contentMain: {
+    width: contentMainWidth
+  },
+
+  item: {
+    padding: 20,
+    marginBottom: 10
+  }
+
+};
 
 
 ReadlineMain.defaultProps = {

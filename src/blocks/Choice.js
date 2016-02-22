@@ -9,7 +9,7 @@ let Choice = Base.createBlock('choice', {
 
   render() {
     return (
-      <section className="block">
+      <section>
         <section>
           {this.props.item.prompt}
         </section>

@@ -5,7 +5,7 @@ let Output = Base.createBlock('output', {
 
   render() {
     return (
-      <section className="block">
+      <section>
         {this.props.item.text}
       </section>
     );

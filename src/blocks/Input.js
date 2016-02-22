@@ -21,7 +21,7 @@ let Input = Base.createBlock('input', {
 
   render() {
     return (
-      <section className="block">
+      <section>
         <section>
           {this.props.item.prompt}
         </section>
