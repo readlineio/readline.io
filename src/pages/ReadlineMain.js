@@ -91,7 +91,7 @@ export default class ReadlineMain extends React.Component {
 
   render() {
     return (
-      <section>
+      <section className="outer">
         <Header />
         <section className="container">
           <section className="content-left">
