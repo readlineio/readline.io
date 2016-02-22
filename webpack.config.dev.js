@@ -21,7 +21,11 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       template: './src/index.html'
-    })
+    }),
+    new webpack.ProvidePlugin({
+      'Promise': 'exports?global.Promise!es6-promise',
+      'fetch': 'exports?self.fetch!whatwg-fetch',
+    }),
   ],
   module: {
     loaders: [
