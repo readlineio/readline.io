@@ -6,7 +6,7 @@ h1 {
 
 body {
   color: '#333333';
-  font-family: 'SF UI Display';
+  font-family: 'SF UI Display', 'Helvetica Neue', sans-serif;
   font-size: 16px;
   font-weight: 300;
   letter-spacing: 0.5px;
