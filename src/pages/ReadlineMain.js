@@ -99,7 +99,6 @@ export default class ReadlineMain extends React.Component {
             <ProgramListing programs={this.state.programs} />
           </section>
           <section className="content-main">
-            <h1 className="card">Example program</h1>
             { this.state.items.map((item, index) => (this.renderItem(item, index))) }
           </section>
         </section>
