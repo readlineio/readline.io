@@ -1,7 +1,4 @@
 h1 {
-  text-align: center;
-  background-color: white;
-  margin: 0 0 10px 0;
   padding: 20px;
   font-weight: 500;
 }
@@ -18,36 +15,61 @@ body {
 }
 
 .card {
+  background-color: white;
   box-shadow: 0 1px 1px rgba(0,0,0,0.12), 0 1px 1px rgba(0,0,0,0.24);
 }
 
 .container {
   /* background-color: #66BBB5; */
   /* background-color: #EEEEEE; */
-  width: 480px;
+  width: 100%;
   margin: 0 auto;
-  padding: 20px;
+  margin: 20px 100px;
   height: 100%;
   min-height: 100%;
+  flex-direction: row;
+  display: flex;
+}
+
+.content-left {
+  width: 280px;
+}
+
+.content-main {
+  width: 600px;
+}
+
+ul {
+  padding: 0 20px;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+a {
+  text-decoration: none;
 }
 
 .header {
   width: 100%;
-  padding: 10px 0;
+  padding: 10px 100px;
   background-color: #3D8B85;
   box-shadow: 0 1px 1px rgba(0,0,0,0.12), 0 1px 1px rgba(0,0,0,0.24);
+  flex-direction: row;
+  display: flex;
 }
 
 .header h2 {
   color: white;
-  text-align: center;
+  text-align: left;
   text-transform: uppercase;
   font-size: 18px;
   letter-spacing: 2px;
   font-family: "Avenir";
   font-weight: 400;
-  margin: 0 auto;
-  width: 50%;
+  padding: 0 20px;
+  margin: 0;
 }
 
 .readline-item {
@@ -80,4 +102,12 @@ button {
 
 button:active {
   background-color: #104642;
+}
+
+.small-text {
+  font-size: 12;
+}
+
+.medium-text {
+  font-size: 16;
 }

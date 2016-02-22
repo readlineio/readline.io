@@ -6,7 +6,11 @@
 
 import React from 'react';
 import {PageChannel} from '../helpers/Channel';
+import ProgramStore from '../helpers/ProgramStore';
+
 import Header from '../components/Header';
+import ProgramListing from '../components/ProgramListing';
+
 import Base from '../blocks/Base';
 import blockRegistry from '../blocks/blockRegistry';
 
@@ -18,7 +22,8 @@ export default class ReadlineMain extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      items: []
+      items: [],
+      programs: []
     };
   }
 
@@ -39,6 +44,11 @@ export default class ReadlineMain extends React.Component {
       });
     });
     this.sendChannel.sendStart();
+
+    this.programStore = new ProgramStore('http://' + SERVER_NAME + '/program');
+    this.programStore.onValue((programs) => {
+      this.setState({programs});
+    });
   }
 
   send(message) {
@@ -71,9 +81,9 @@ export default class ReadlineMain extends React.Component {
     }
   }
 
-  renderItem(item) {
+  renderItem(item, index) {
     return (
-      <section className="readline-item card">
+      <section key={index} className="readline-item card">
         {this.renderItemInner(item)}
       </section>
     )
@@ -84,8 +94,14 @@ export default class ReadlineMain extends React.Component {
       <section>
         <Header />
         <section className="container">
-          <h1 className="card">Example program</h1>
-          { this.state.items.map((item) => (this.renderItem(item))) }
+          <section className="content-left">
+            <h1>Recent Programs</h1>
+            <ProgramListing programs={this.state.programs} />
+          </section>
+          <section className="content-main">
+            <h1 className="card">Example program</h1>
+            { this.state.items.map((item, index) => (this.renderItem(item, index))) }
+          </section>
         </section>
       </section>
     );
