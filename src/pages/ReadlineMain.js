@@ -11,9 +11,8 @@ import ProgramStore from '../helpers/ProgramStore';
 
 import Header from '../components/Header';
 import ProgramListing from '../components/ProgramListing';
+import ProgramOutput from '../components/ProgramOutput';
 
-import Base from '../blocks/Base';
-import blockRegistry from '../blocks/blockRegistry';
 
 const SERVER_NAME = 'readline.io';
 
@@ -24,7 +23,8 @@ export default class ReadlineMain extends React.Component {
     super(props, context);
     this.state = {
       items: [],
-      programs: []
+      programs: [],
+      containerWidth: 960
     };
   }
 
@@ -60,48 +60,25 @@ export default class ReadlineMain extends React.Component {
     this.sendChannel.sendCall(fn, args, kwargs);
   }
 
-  renderItemDefault(item) {
-    return (
-      <h2>{item}</h2>
-    );
-  }
-
-  renderItemInner(item) {
-    let Factory = Base.blockRegistry[item.type];
-    if (!Factory) {
-      console.warn("Invalid block type:", item.type);
-      return this.renderItemDefault(item);
-    } else {
-      return (
-        <Factory
-          item={item}
-          send={(message) => this.send(message)}
-          sendCall={(fn, args, kwargs) => this.sendCall(fn, args, kwargs)}
-          />
-      );
-    }
-  }
-
-  renderItem(item, index) {
-    return (
-      <section key={index} style={Object.assign({}, styles.item, BaseStyles.card)}>
-        {this.renderItemInner(item)}
-      </section>
-    )
-  }
-
   render() {
     return (
       <section style={styles.outer}>
-        <Header />
+        <Header containerWidth={containerWidth}/>
         <section style={styles.container}>
+
           <section style={styles.contentLeft}>
             <h1 style={styles.programHeader}>Recent Programs</h1>
             <ProgramListing programs={this.state.programs} />
           </section>
+
           <section style={styles.contentMain}>
-            { this.state.items.map((item, index) => (this.renderItem(item, index))) }
+            <ProgramOutput
+              items={this.state.items}
+              send={(message) => this.send(message)}
+              sendCall={(fn, args, kwargs) => this.sendCall(fn, args, kwargs)}
+            />
           </section>
+
         </section>
       </section>
     );
@@ -127,8 +104,6 @@ let styles = {
   },
 
   container: {
-    /* background-color: #66BBB5; */
-    /* background-color: #EEEEEE; */
     width: containerWidth,
     margin: '20px auto',
     display: 'flex',
@@ -140,11 +115,6 @@ let styles = {
   },
   contentMain: {
     width: contentMainWidth
-  },
-
-  item: {
-    padding: 20,
-    marginBottom: 10
   }
 
 };

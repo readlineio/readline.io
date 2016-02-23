@@ -8,7 +8,7 @@ import React from 'react';
 
 export default (props) => (
   <section style={styles.outer}>
-    <section style={styles.header}>
+    <section style={Object.assign({width: props.containerWidth}, styles.header)}>
       <h2 style={styles.headerLogo}>Readline.io</h2>
     </section>
   </section>
@@ -24,7 +24,6 @@ const styles = {
   },
 
   header: {
-    width: 960,
     margin: '0 auto',
     flexDirection: 'row',
     display: 'flex'
