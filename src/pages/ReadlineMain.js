@@ -29,8 +29,7 @@ export default class ReadlineMain extends React.Component {
   }
 
   componentDidMount() {
-    // TODO: security for all these channels
-    // TODO: allow dashes in channel ids
+    // TODO: Move this to program start
     let sendChannelId = this.props.pageId;
     this.sendChannel = new PageChannel('http://' + SERVER_NAME + '/channel/', sendChannelId);
 
@@ -39,17 +38,26 @@ export default class ReadlineMain extends React.Component {
     this.recvChannel.listen();
 
     this.recvChannel.onMessage((message) => {
-      console.log('Appending message:', message);
       this.setState({
         items: this.state.items.concat([message])
       });
     });
-    this.sendChannel.sendStart();
 
     this.programStore = new ProgramStore('http://' + SERVER_NAME + '/program');
     this.programStore.onValue((programs) => {
       this.setState({programs});
     });
+
+    window.addEventListener('resize', (evt) => this.handleResize())
+
+    this.handleResize();
+    this.sendChannel.sendStart();
+  }
+
+  handleResize() {
+    let documentWidth = document.body.offsetWidth;
+    let containerWidth = Math.min(960, documentWidth);
+    this.setState({ containerWidth });
   }
 
   send(message) {
@@ -61,17 +69,23 @@ export default class ReadlineMain extends React.Component {
   }
 
   render() {
+    let singleColumn = this.state.containerWidth < 960;
+    let contentLeftWidth = singleColumn ? (this.state.containerWidth - 40) : 280;
+    let contentMainWidth = singleColumn ? (this.state.containerWidth - 40) : (this.state.containerWidth - contentLeftWidth);
+
     return (
       <section style={styles.outer}>
-        <Header containerWidth={containerWidth}/>
-        <section style={styles.container}>
+        <Header containerWidth={this.state.containerWidth}/>
+        <section style={Object.assign({width: this.state.containerWidth}, styles.container)}>
 
-          <section style={styles.contentLeft}>
-            <h1 style={styles.programHeader}>Recent Programs</h1>
-            <ProgramListing programs={this.state.programs} />
-          </section>
-
-          <section style={styles.contentMain}>
+          { singleColumn ? null : (
+            <section style={{width: contentLeftWidth}}>
+              <h1 style={styles.programHeader}>Recent Programs</h1>
+              <ProgramListing programs={this.state.programs} />
+             </section>
+            ) 
+          }
+          <section style={{width: contentMainWidth, margin: '0 auto'}}>
             <ProgramOutput
               items={this.state.items}
               send={(message) => this.send(message)}
@@ -80,15 +94,17 @@ export default class ReadlineMain extends React.Component {
           </section>
 
         </section>
+        { singleColumn ? (
+          <section style={{width: contentLeftWidth, margin: '0 auto'}}>
+            <h1 style={styles.programHeader}>Recent Programs</h1>
+            <ProgramListing programs={this.state.programs} />
+           </section>
+          ) : null
+        }
       </section>
     );
   }
-
 }
-
-const containerWidth = 960;
-const contentLeftWidth = 280;
-const contentMainWidth = containerWidth - contentLeftWidth;
 
 
 let styles = {
@@ -98,23 +114,13 @@ let styles = {
     fontWeight: '500',
     margin: '10px 0'
   },
-
   outer: {
     width: '100%'
   },
-
   container: {
-    width: containerWidth,
     margin: '20px auto',
     display: 'flex',
     flexDirection: 'row'
-  },
-
-  contentLeft: {
-    width: contentLeftWidth
-  },
-  contentMain: {
-    width: contentMainWidth
   }
 
 };
