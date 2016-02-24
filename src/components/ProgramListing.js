@@ -9,6 +9,7 @@ import {PageChannel} from '../helpers/Channel';
 import Header from '../components/Header';
 import Base from '../blocks/Base';
 import blockRegistry from '../blocks/blockRegistry';
+import {BaseStyles} from '../constants/Constants';
 
 const timeToTimeAgo = (time) => {
   let currentTime = (new Date()).getTime()
@@ -27,11 +28,11 @@ const timeToTimeAgo = (time) => {
 };
 
 const ProgramListingItem = (props) => (
-  <section className="program">
-    <section className="medium-text">
+  <section>
+    <section style={BaseStyles.mediumText}>
       <a href={"/" + props.program.channel}>{props.program.title}</a>
     </section>
-    <section className="small-text">
+    <section style={BaseStyles.smallText}>
       {"Last updated: " + timeToTimeAgo(props.program.last_update_time)}
     </section>
   </section>
