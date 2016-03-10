@@ -31,10 +31,10 @@ export default class ReadlineMain extends React.Component {
   componentDidMount() {
     // TODO: Move this to program start
     let sendChannelId = this.props.pageId;
-    this.sendChannel = new PageChannel('http://' + SERVER_NAME + '/channel/', sendChannelId);
+    this.sendChannel = new PageChannel('https://' + SERVER_NAME + '/channel/', sendChannelId);
 
     let clientChannelId = this.sendChannel.sessionId;
-    this.recvChannel = new PageChannel('http://' + SERVER_NAME + '/channel/', clientChannelId);
+    this.recvChannel = new PageChannel('https://' + SERVER_NAME + '/channel/', clientChannelId);
     this.recvChannel.listen();
 
     this.recvChannel.onMessage((message) => {
@@ -43,7 +43,7 @@ export default class ReadlineMain extends React.Component {
       });
     });
 
-    this.programStore = new ProgramStore('http://' + SERVER_NAME + '/program');
+    this.programStore = new ProgramStore('https://' + SERVER_NAME + '/program');
     this.programStore.onValue((programs) => {
       this.setState({programs});
     });
