@@ -11,7 +11,7 @@
   "homepage": "https://readline.io",
   "main": "./server.js",
   "scripts": {
-    "build": "webpack --config webpack.config.prod.js && scp dist/* flubstep.com:~/readline.io-www/",
+    "build": "webpack --config webpack.config.prod.js && scp dist/* rio@readline.io:~/readline-www/",
     "dev": "node server.js"
   },
   "dependencies": {
